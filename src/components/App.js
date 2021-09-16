@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -112,12 +113,17 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-  }
+  } 
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
+        <Switch>
+          <Route path='/sing-up'></Route>
+          <Route path='/sing-in'></Route>
+          <Route path='/'></Route>
+        </Switch>
         <Main 
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
