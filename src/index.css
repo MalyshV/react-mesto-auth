@@ -6,6 +6,7 @@
 @import url(./blocks/auth/__form/auth__form.css);
 @import url(./blocks/auth/__title/auth__title.css);
 @import url(./blocks/auth/__link/auth__link.css);
+@import url(./blocks/auth/__signup/auth__signup.css);
 
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__buttons/page__buttons.css);

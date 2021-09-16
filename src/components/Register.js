@@ -33,7 +33,7 @@ function Register(props) {
           <button type="submit" className="input-container__button input-container__button_type_dark">Зарегистрироваться</button>
         </fieldset>
       </form>
-      <div className="auth__singup">
+      <div className="auth__signup">
         <p>Уже зарегистрированы?</p>
         <Link className="auth__link" to="/sing-in">Войти</Link>
       </div>
