@@ -10,3 +10,7 @@
   text-align: center;
   color: #FFF;
 }
+
+.auth__link:hover {
+  opacity: 0.6;
+}

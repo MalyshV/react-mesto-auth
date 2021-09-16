@@ -19,10 +19,14 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [selectCard, setSelectCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  // const [email, setEmail] = useState[''];
+
   //const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = useState(false); 
 
   useEffect(() => {
@@ -120,22 +124,28 @@ function App() {
       })
   } 
 
-  function registration(email, password) {}
-  function authorization(email, password) {}
+  function registration(email, password) {} // заготовка для работы с токеном
+  function authorization(email, password) {} // заготовка для работы с токеном 
+
+  function handleInfoTooltipOpen() { // заготовка для регистрации
+    setIsInfoTooltipOpen(true);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header 
+          //email={email}
+        />
         <Switch>
-          <Route path="/sing-up">
+          <Route path="/sign-up">
             <Register registration={registration}/>
           </Route>
-          <Route path="/sing-in">
+          <Route path="/sign-in">
             <Login authorization={authorization}/>
           </Route>
           <Route path='/'>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sing-in" />}
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           </Route>
           <ProtectedRoute 
             exact path="/"
@@ -151,6 +161,11 @@ function App() {
             cards={cards}
           />
         </Switch>
+        <InfoTooltip 
+            isOpen={isInfoTooltipOpen}
+            onClose={closeAllPopups}
+            isRegistered={isRegistered}
+          />
         <Footer />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

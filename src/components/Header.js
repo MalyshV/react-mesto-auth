@@ -10,14 +10,14 @@ function Header(props) {
           <Route exact path="/">
             <div className="header__loggedIn">
               <p>{props.email}</p>  
-              <Link className="page__buttons" to="sing-in">Выйти</Link>
+              <Link className="page__buttons" to="sign-in">Выйти</Link>
             </div>
           </Route>
-          <Route path="/sing-up">
-            <Link className="page__buttons" to="sing-in">Войти</Link>
+          <Route path="/sign-up">
+            <Link className="page__buttons" to="sign-in">Войти</Link>
           </Route>
-          <Route path="/sing-in">
-            <Link className="page__buttons" to="sing-in">Регистрация</Link>
+          <Route path="/sign-in">
+            <Link className="page__buttons" to="sign-up">Регистрация</Link>
           </Route>
         </Switch>
     </header>

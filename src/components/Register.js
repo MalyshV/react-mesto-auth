@@ -25,7 +25,7 @@ function Register(props) {
 
   return(
     <div className="auth">
-      <h1 claaName="auth__title">Регистрация</h1>
+      <h1 className="auth__title">Регистрация</h1>
       <form className="auth__form" onSubmit={handleSubmit}>
         <fieldset className="input-container">
           <input className="input-container__item input-container__item_type_dark" required id="userEmail" name="username" placeholder="Email" type="email" tabIndex="1" onChange={handleChangeEmail} value={userEmail}/>
