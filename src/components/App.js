@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -8,8 +9,11 @@ import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPoup'; 
+import InfoTooltip from './InfoTooltip';
+import Login from './Login';
+import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
 import api from '../utils/api';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -18,6 +22,7 @@ function App() {
   const [selectCard, setSelectCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
   //const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = useState(false); 
 
   useEffect(() => {
@@ -115,25 +120,37 @@ function App() {
       })
   } 
 
+  function registration(email, password) {}
+  function authorization(email, password) {}
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
         <Switch>
-          <Route path='/sing-up'></Route>
-          <Route path='/sing-in'></Route>
-          <Route path='/'></Route>
+          <Route path='/sing-up'>
+            <Register registration={registration}/>
+          </Route>
+          <Route path='/sing-in'>
+            <Login authorization={authorization}/>
+          </Route>
+          <Route path='/'>
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sing-in" />}
+          </Route>
+          <ProtectedRoute 
+            exact path="/"
+            loggedIn={loggedIn}
+            component={Main}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlaceButtonClick={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onDeleteButtonClick={handleDeleteCard}
+            //onDeleteButtonClick={handleDeletePlaceClick} временно убрала открытые попапа
+            cards={cards}
+          />
         </Switch>
-        <Main 
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlaceButtonClick={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onDeleteButtonClick={handleDeleteCard}
-          //onDeleteButtonClick={handleDeletePlaceClick} временно убрала открытые попапа
-          cards={cards}
-        />
         <Footer />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

@@ -2,6 +2,11 @@
 
 @import url(./vendor/fonts/fonts.css);
 
+@import url(./blocks/auth/auth.css);
+@import url(./blocks/auth/__form/auth__form.css);
+@import url(./blocks/auth/__title/auth__title.css);
+@import url(./blocks/auth/__link/auth__link.css);
+
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__buttons/page__buttons.css);
 @import url(./blocks/page/__container/page__container.css);
@@ -56,7 +61,9 @@
 @import url(./blocks/input-container/input-container.css);
 @import url(./blocks/input-container/__item/input-container__item.css);
 @import url(./blocks/input-container/__item/_type/input-container__item_type_error.css);
+@import url(./blocks/input-container/__item/_type/input-container__item_type_dark.css);
 @import url(./blocks/input-container/__button/input-container__button.css);
-@import url(./blocks/input-container/__button/_type_delete/input-container__button_type_delete.css);
+@import url(./blocks/input-container/__button/_type/input-container__button_type_delete.css);
+@import url(./blocks/input-container/__button/_type/input-container__button_type_dark.css);
 @import url(./blocks/input-container/__input-error/input-container__input-error.css);
 @import url(./blocks/input-container/__input-error/_active/input-container__input-error_active.css);
