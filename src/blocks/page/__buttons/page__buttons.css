@@ -3,4 +3,10 @@
   cursor: pointer;
   border: none;
   padding: 0;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.page__buttons:hover {
+  opacity: 0.6;
 }

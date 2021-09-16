@@ -128,10 +128,10 @@ function App() {
       <div className="page">
         <Header />
         <Switch>
-          <Route path='/sing-up'>
+          <Route path="/sing-up">
             <Register registration={registration}/>
           </Route>
-          <Route path='/sing-in'>
+          <Route path="/sing-in">
             <Login authorization={authorization}/>
           </Route>
           <Route path='/'>
