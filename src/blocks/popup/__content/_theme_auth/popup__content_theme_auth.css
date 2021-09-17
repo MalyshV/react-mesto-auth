@@ -1,0 +1,8 @@
+.popup__content_theme_auth {
+  padding: 60px 0;
+  width: 430px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

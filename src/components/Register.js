@@ -3,24 +3,23 @@ import { Link } from 'react-router-dom';
 
 function Register(props) {
 
-  const [userEmail, setEmail] = useState('');
-  const [userPassword, setPassword] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
 
   function handleChangeEmail(e) {
-    setEmail(e.target.value);
+    setUserEmail(e.target.value);
   }
 
   function handleChangePassword(e) {
-    setPassword(e.target.value);
+    setUserPassword(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const email = userEmail;
     const password = userPassword;
 
-    props.registration(email, password);
+    props.handleRegistration(email, password);
   }
 
   return(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Main from './Main';
@@ -14,6 +14,7 @@ import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
 import api from '../utils/api';
+import * as auth from '../utils/auth';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -23,9 +24,10 @@ function App() {
   const [selectCard, setSelectCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  // const [email, setEmail] = useState[''];
+  const [email, setEmail] = useState('');
+  const history = useHistory();
 
   //const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = useState(false); 
 
@@ -42,6 +44,23 @@ function App() {
       console.log(error);
     })
   }, [])
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth.getContent(jwt)
+        .then((res) => {
+          if (res) {
+            setEmail(res.data.email);
+          }
+          setIsLoggedIn(true);
+          history.push('/');
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+  }, [isLoggedIn, history])
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -87,6 +106,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsInfoTooltipOpen(false);
     //setIsDeletePlacePopupOpen(false); на время, пока карточка удаляется напрямую 
     setSelectCard({});
   }
@@ -97,8 +117,8 @@ function App() {
         setCurrentUser(data);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
       })
   }
 
@@ -108,8 +128,8 @@ function App() {
         setCurrentUser(data);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
       })
   }
 
@@ -119,38 +139,63 @@ function App() {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
       })
-  } 
+  }
 
-  function registration(email, password) {} // заготовка для работы с токеном
-  function authorization(email, password) {} // заготовка для работы с токеном 
+  function handleRegistration(email, password) {
+    auth.register(email, password)
+      .then(() => {
+        console.log(email, password); // - провека логина/пароля
+        setIsRegistered(true);
+        handleInfoTooltipOpen();
+        history.push('/sing-in');
+      })
+      .catch((error) => {
+        setIsRegistered(false);
+        handleInfoTooltipOpen();
+        console.log(error);
+      })
+  }
 
-  function handleInfoTooltipOpen() { // заготовка для регистрации
+  function handleAuthorization(email, password) {
+    auth.authorize(email, password)
+      .then((data) => {
+        console.log(data); // - проверка токена
+        if (data.token) {
+          localStorage.setItem('jwt', data.token)
+        }
+        setEmail(email);
+        setIsLoggedIn(true);
+        history.push('/');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  function handleInfoTooltipOpen() {
     setIsInfoTooltipOpen(true);
+  }
+
+  function handleSignOut() {
+    localStorage.removeItem('jwt');
+    history.push('/sign-in');
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header 
-          //email={email}
+          email={email}
+          handleSignOut={handleSignOut}
         />
         <Switch>
-          <Route path="/sign-up">
-            <Register registration={registration}/>
-          </Route>
-          <Route path="/sign-in">
-            <Login authorization={authorization}/>
-          </Route>
-          <Route path='/'>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
-          </Route>
           <ProtectedRoute 
-            exact path="/"
-            loggedIn={loggedIn}
+            path='/'
             component={Main}
+            isLoggedIn={isLoggedIn}
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlaceButtonClick={handleAddPlaceClick}
@@ -160,11 +205,20 @@ function App() {
             //onDeleteButtonClick={handleDeletePlaceClick} временно убрала открытые попапа
             cards={cards}
           />
+          <Route path='/sign-up'>
+            <Register handleRegistration={handleRegistration} />
+          </Route>
+          <Route path='/sign-in'>
+            <Login handleAuthorization={handleAuthorization} />
+          </Route>
+          <Route path='/'>
+            { !isLoggedIn ? <Redirect to='/sign-in' /> : <Redirect to='/' /> }
+          </Route>
         </Switch>
         <InfoTooltip 
-            isOpen={isInfoTooltipOpen}
-            onClose={closeAllPopups}
-            isRegistered={isRegistered}
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopups}
+          isRegistered={isRegistered}
           />
         <Footer />
         <EditAvatarPopup
