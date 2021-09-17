@@ -147,7 +147,6 @@ function App() {
   function handleRegistration(email, password) {
     auth.register(email, password)
       .then(() => {
-        console.log(email, password); // - провека логина/пароля
         setIsRegistered(true);
         handleInfoTooltipOpen();
         history.push('/sing-in');
@@ -162,7 +161,6 @@ function App() {
   function handleAuthorization(email, password) {
     auth.authorize(email, password)
       .then((data) => {
-        console.log(data); // - проверка токена
         if (data.token) {
           localStorage.setItem('jwt', data.token)
         }

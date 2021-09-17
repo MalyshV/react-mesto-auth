@@ -46,10 +46,3 @@ export const getContent = (token) => {
   .then(res => res.json())
   .then(data => data)
 }
-
-/*export const checkRespons = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
-}*/
