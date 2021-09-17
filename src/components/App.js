@@ -193,7 +193,7 @@ function App() {
         />
         <Switch>
           <ProtectedRoute 
-            path='/'
+            exact path='/'
             component={Main}
             isLoggedIn={isLoggedIn}
             onEditAvatar={handleEditAvatarClick}
