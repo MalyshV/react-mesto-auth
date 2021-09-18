@@ -79,7 +79,7 @@ class Api {
     .then(this._checkResponse);
   }
 
-  checkResponse(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
