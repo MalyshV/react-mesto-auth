@@ -71,3 +71,7 @@
 @import url(./blocks/input-container/__button/_type/input-container__button_type_dark.css);
 @import url(./blocks/input-container/__input-error/input-container__input-error.css);
 @import url(./blocks/input-container/__input-error/_active/input-container__input-error_active.css);
+
+@import url(./blocks/not-found/not-found.css);
+@import url(./blocks/not-found/__title/not-found__title.css);
+@import url(./blocks/not-found/__subtitle/not-found__subtitle.css);
