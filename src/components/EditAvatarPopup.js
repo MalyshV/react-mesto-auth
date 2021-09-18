@@ -8,10 +8,7 @@ function validator() {
 
 const validators = {
   avatar: {
-    required: (value) => { return value === ''; },
-    minLength: (value) => { return value.length < 10; },
-    //isEmail: (value) => {},
-    //containNumbers: (value) => { retutn !/[0-9]/.test(value); }
+    isUrl: (value) => { return !/["https://.*"]/.test(value); }
   }
 };
 
@@ -24,9 +21,7 @@ function EditAvatarPopup(props) {
 
   const [errors, setErrors] = useState({
     avatar: {
-      required: true,
-      minLength: true,
-      containNumbers: true,
+      isUrl: true,
     }
   });
 
@@ -67,8 +62,7 @@ function EditAvatarPopup(props) {
   return(
     <PopupWithForm name="userPhotoForm" title="Обновить аватар" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} textOnButton="Сохранить">
       <input id="url" type="url" ref={avatarRef} className="input-container__item" name="avatar" placeholder="Ссылка на фото" value={avatar} tabIndex="1" required onChange={handleInputChange} />
-      { errors.avatar.required && <span className="input-container__input-error input-container__input-error_active" id="url-error">Required</span> }
-      { errors.avatar.minLength && <span className="input-container__input-error input-container__input-error_active">Min length is 10</span> }
+      { errors.avatar.isUrl && <span className="input-container__input-error input-container__input-error_active">Введите ссылку</span> }
     </PopupWithForm>
   )
 }
