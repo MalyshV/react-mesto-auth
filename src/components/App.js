@@ -13,6 +13,7 @@ import InfoTooltip from './InfoTooltip';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
+import PageNotFound from './PageNotFound';
 import api from '../utils/api';
 import * as auth from '../utils/auth';
 
@@ -211,6 +212,9 @@ function App() {
           </Route>
           <Route path='/'>
             { !isLoggedIn ? <Redirect to='/sign-in' /> : <Redirect to='/' /> }
+          </Route>
+          <Route path='*'>
+            <PageNotFound />
           </Route>
         </Switch>
         <InfoTooltip 
