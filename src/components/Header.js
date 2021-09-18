@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from '../images/LogoVector.svg';
 import { Switch, Route, Link } from 'react-router-dom';
+import Burger from './../images/Burger.svg';
+import BurgerClose from './../images/BurgerClose.svg';
 
 function Header(props) {
   return(
@@ -8,6 +10,7 @@ function Header(props) {
         <img className="header__logo" src={logo} alt="Логотип сервиса Mesto"/>
         <Switch>
           <Route exact path="/">
+            <button className="header__button" />
             <div className="header__loggedIn">
               <p className="header__email-container">{props.email}</p>  
               <Link className="page__buttons" to="/sign-in" onClick={props.handleSignOut}>Выйти</Link>
@@ -25,3 +28,5 @@ function Header(props) {
 }
 
 export default Header;
+
+//<img src={props.isRegistered ? BurgerClose: Burger} />

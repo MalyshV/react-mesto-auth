@@ -4,7 +4,10 @@
 
 @media (max-width: 425px) {
   .header__loggedIn {
+    display: none;
+  }
+  /*.header__loggedIn {
     text-align: center;
     margin: 34px 30px 33px 0;
-  }
+  }*/
 }
