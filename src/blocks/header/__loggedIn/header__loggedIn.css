@@ -4,6 +4,8 @@
 
 @media (max-width: 425px) {
   .header__loggedIn {
+    flex-direction: column;
+    text-align: center;
     display: none;
   }
   /*.header__loggedIn {
