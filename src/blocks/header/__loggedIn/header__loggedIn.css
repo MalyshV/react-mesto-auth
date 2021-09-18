@@ -1,3 +1,11 @@
 .header__loggedIn {
-    display: flex;
+  display: flex;
+}
+
+@media (max-width: 425px) {
+  .header__loggedIn {
+    flex-direction: column;
+    text-align: center;
+    margin: 40px 0;
+  }
 }

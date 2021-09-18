@@ -5,8 +5,8 @@
 
 @media (max-width: 425px) {
   .header__logo {
-    margin-bottom: 31px;
-    margin-left: 19px;
+    margin-bottom: 0;
+    margin-left: 30px;
     width: 104px;
   }
 }

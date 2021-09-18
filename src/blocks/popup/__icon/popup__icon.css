@@ -3,3 +3,9 @@
   height: 120px;
   margin-bottom: 32px;
 }
+
+@media (max-width: 425px) {
+  .popup__icon {
+    margin-bottom: 40px;
+  }
+}
