@@ -9,7 +9,7 @@ class Api {
       method: 'GET',
       headers: this._headers,
   })
-  .then(this._checkRespons);
+  .then(this._checkResponse);
   }
 
   setUserInfo(data) {
@@ -21,7 +21,7 @@ class Api {
         about: data.about,
       })
     })
-    .then(this._checkRespons);
+    .then(this._checkResponse);
   }
 
   setUserAvatar(data) {
@@ -32,7 +32,7 @@ class Api {
         avatar: data.avatar,
       })
     })
-    .then(this._checkRespons);
+    .then(this._checkResponse);
   }
 
   getInitialCards() {
@@ -40,7 +40,7 @@ class Api {
       method: 'GET',
       headers: this._headers,
     })
-    .then(this._checkRespons);
+    .then(this._checkResponse);
   }
 
   addNewCard(data) {
@@ -52,7 +52,7 @@ class Api {
         link: data.link,
       })
     })
-    .then(this._checkRespons);
+    .then(this._checkResponse);
   }
 
   removeCard(cardId) {
@@ -60,7 +60,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(this._checkRespons);
+    .then(this._checkResponse);
   }
 
   setlike(cardId) {
@@ -68,7 +68,7 @@ class Api {
       method: 'PUT',
       headers: this._headers,
     })
-    .then(this._checkRespons);
+    .then(this._checkResponse);
   }
 
   removeLike(cardId) {
@@ -76,10 +76,10 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(this._checkRespons);
+    .then(this._checkResponse);
   }
 
-  _checkRespons(res) {
+  checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
