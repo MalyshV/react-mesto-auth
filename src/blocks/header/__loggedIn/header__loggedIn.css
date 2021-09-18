@@ -4,8 +4,7 @@
 
 @media (max-width: 425px) {
   .header__loggedIn {
-    flex-direction: column;
     text-align: center;
-    margin: 40px 0;
+    margin: 34px 30px 33px 0;
   }
 }

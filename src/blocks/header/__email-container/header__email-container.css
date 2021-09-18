@@ -4,9 +4,8 @@
   margin-right: 24px;
 }
 
-@media (max-width: 425px) {
+/*@media (max-width: 425px) {
   .header__email-container {
-    margin-right: 0;
-    margin-bottom: 18px;
+    
   }
-}
+}*/
