@@ -9,11 +9,10 @@ function Header(props) {
 
   function handleBurgerMenuClick() {
     setIsClicked(true);
-    console.log('и покажи логин/пароль');
   }
 
   return(
-    <header className={`header page__container ${isClicked ? '' : ''}`}>
+    <header className="header page__container">
       {isClicked && 
         <div className="header__loggedIn header__burger">
           <p className="header__email-container">{props.email}</p>  
@@ -45,5 +44,3 @@ function Header(props) {
 }
 
 export default Header;
-
-//<img src={isClicked ? BurgerClose: Burger} />
