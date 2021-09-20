@@ -63,12 +63,25 @@ function App() {
     }
   }, [isLoggedIn, history])
 
+  useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener('keydown', closeByEscape)
+    return () => document.removeEventListener('keydown', closeByEscape)
+  }, []) 
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     const changeLikeCardStatus = isLiked? api.removeLike(card._id) : api.setlike(card._id);
     
     changeLikeCardStatus.then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 
@@ -149,22 +162,21 @@ function App() {
     auth.register(email, password)
       .then(() => {
         setIsRegistered(true);
-        handleInfoTooltipOpen();
         history.push('/sing-in');
       })
       .catch((error) => {
         setIsRegistered(false);
-        handleInfoTooltipOpen();
         console.log(error);
+      })
+      .finally(() => {
+        handleInfoTooltipOpen();
       })
   }
 
   function handleAuthorization(email, password) {
     auth.authorize(email, password)
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem('jwt', data.token)
-        }
+        localStorage.setItem('jwt', data.token)
         setEmail(email);
         setIsLoggedIn(true);
         history.push('/');
@@ -187,7 +199,6 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header
-          
           email={email}
           handleSignOut={handleSignOut}
         />

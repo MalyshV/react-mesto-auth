@@ -7,6 +7,16 @@ function EditProfilePopup(props) {
   const [description, setDescription] = useState('');
   const currentUser = useContext(CurrentUserContext);
 
+  // подготовка к управлению двумя инпутами
+  /*const [inputValues, setInputValues] = useState({
+    name: '',
+    description: '',
+  });
+
+  function handleInputValues(e) {
+    setInputValues(e.target.value);
+  }*/
+
   function handleNameChange(e) {
     setName(e.target.value);
   }
@@ -18,7 +28,7 @@ function EditProfilePopup(props) {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();

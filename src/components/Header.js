@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import logo from '../images/LogoVector.svg';
 import { Switch, Route, Link } from 'react-router-dom';
-import Burger from './../images/Burger.svg';
-import BurgerClose from './../images/BurgerClose.svg';
+import burger from './../images/Burger.svg';
+import burgerClose from './../images/BurgerClose.svg';
 
 function Header(props) {
   const [isClicked, setIsClicked] = useState(false);
@@ -24,7 +24,7 @@ function Header(props) {
           <Switch>
             <Route exact path="/">
               <button className="header__button" onClick={handleBurgerMenuClick}>
-                <img src={isClicked ? BurgerClose : Burger} />
+                <img src={isClicked ? burgerClose : burger} alt="Иконка меню"/>
               </button>
               <div className="header__loggedIn">
                 <p className="header__email-container">{props.email}</p>  
