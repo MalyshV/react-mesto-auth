@@ -2,30 +2,30 @@ import React, { useContext } from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main(props) {
+function Main({ onEditAvatar, cards, onCardClick, onCardLike, onDeleteButtonClick, onAddPlaceButtonClick, onEditProfile }) {
   const currentUser = useContext(CurrentUserContext);
 
   return(
     <main className="content page__container">
       <section className="profile">
         <div className="profile__avatar">
-          <button className="profile__icon page__buttons" onClick={props.onEditAvatar}>
+          <button className="profile__icon page__buttons" onClick={onEditAvatar}>
             <img className="profile__image" alt="фото пользователя" src={currentUser.avatar} />
           </button>
           <div className="profile__info">
             <div className="profile__change">
               <h1 className="profile__user-name">{currentUser.name}</h1>
-              <button className="profile__edit-button page__buttons" type="button" onClick={props.onEditProfile} />
+              <button className="profile__edit-button page__buttons" type="button" onClick={onEditProfile} />
             </div>
             <p className="profile__user-job">{currentUser.about}</p>
           </div>
         </div>
-        <button className="profile__add-button page__buttons" type="submit" onClick={props.onAddPlaceButtonClick} />
+        <button className="profile__add-button page__buttons" type="submit" onClick={onAddPlaceButtonClick} />
       </section>
       <section className="elements">
         <div className="elements__list">
-          {props.cards.map(card => {
-            return(<Card key={card._id} {...card} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onDeleteButtonClick={props.onDeleteButtonClick}/>)
+          {cards.map(card => {
+            return(<Card key={card._id} {...card} onCardClick={onCardClick} onCardLike={onCardLike} onDeleteButtonClick={onDeleteButtonClick}/>)
           })}
         </div>
       </section>

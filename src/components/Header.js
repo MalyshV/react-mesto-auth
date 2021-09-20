@@ -4,7 +4,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import burger from './../images/Burger.svg';
 import burgerClose from './../images/BurgerClose.svg';
 
-function Header(props) {
+function Header({ email, handleSignOut }) {
   const [isClicked, setIsClicked] = useState(false);
 
   function handleBurgerMenuClick() {
@@ -15,8 +15,8 @@ function Header(props) {
     <header className="header page__container">
       {isClicked && 
         <div className="header__loggedIn header__burger">
-          <p className="header__email-container">{props.email}</p>  
-          <Link className="page__buttons" to="/sign-in" onClick={props.handleSignOut}>Выйти</Link>
+          <p className="header__email-container">{email}</p>  
+          <Link className="page__buttons" to="/sign-in" onClick={handleSignOut}>Выйти</Link>
         </div>
       }
       <div className="header__wrapper">
@@ -27,8 +27,8 @@ function Header(props) {
                 <img src={isClicked ? burgerClose : burger} alt="Иконка меню"/>
               </button>
               <div className="header__loggedIn">
-                <p className="header__email-container">{props.email}</p>  
-                <Link className="page__buttons" to="/sign-in" onClick={props.handleSignOut}>Выйти</Link>
+                <p className="header__email-container">{email}</p>  
+                <Link className="page__buttons" to="/sign-in" onClick={handleSignOut}>Выйти</Link>
               </div>
             </Route>
             <Route path="/sign-up">
