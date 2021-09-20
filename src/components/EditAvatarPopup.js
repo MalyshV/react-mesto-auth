@@ -12,7 +12,7 @@ function EditAvatarPopup(props) {
 
   useEffect(() => {
     setAvatar(currentUser.avatar);
-  }, [currentUser, props.iOpen])
+  }, [currentUser])
 
   function handleSubmit(e) {
     e.preventDefault();

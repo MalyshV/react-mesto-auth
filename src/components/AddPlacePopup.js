@@ -18,7 +18,7 @@ function AddPlacePopup(props) {
   useEffect(() => {
     setCardForm(currentUser.cardForm);
     setLink(currentUser.link);
-  }, [currentUser, props.iOpen])
+  }, [currentUser])
 
 
   function handleSubmit(e) {
