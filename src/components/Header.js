@@ -7,6 +7,8 @@ import burgerClose from './../images/BurgerClose.svg';
 function Header({ email, handleSignOut }) {
   const [isClicked, setIsClicked] = useState(false);
 
+  const burgerMenuIcon = `${isClicked ? burgerClose : burger}`;
+
   function handleBurgerMenuClick() {
     setIsClicked(true);
   }
@@ -24,7 +26,7 @@ function Header({ email, handleSignOut }) {
           <Switch>
             <Route exact path="/">
               <button className="header__button" onClick={handleBurgerMenuClick}>
-                <img src={isClicked ? burgerClose : burger} alt="Иконка меню"/>
+                <img src={burgerMenuIcon} alt="Иконка меню"/>
               </button>
               <div className="header__loggedIn">
                 <p className="header__email-container">{email}</p>  
