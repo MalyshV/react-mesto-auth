@@ -1,3 +1,5 @@
+/*import { useEffect } from 'react';
+
 function Popup({ isOpen, onClose, className, closeAllPopups }) {
     const classList = ['popup']
     if (isOpen) classList.push('popup_is-opened');
@@ -18,4 +20,4 @@ function Popup({ isOpen, onClose, className, closeAllPopups }) {
     return (
       <div className={classes} onClose={onClose}>{children}</div>
     );
-  }  
+  }  */
