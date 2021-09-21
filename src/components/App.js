@@ -16,6 +16,7 @@ import ProtectedRoute from './ProtectedRoute';
 import PageNotFound from './PageNotFound';
 import api from '../utils/api';
 import * as auth from '../utils/auth';
+//import Popup from './Popup';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);

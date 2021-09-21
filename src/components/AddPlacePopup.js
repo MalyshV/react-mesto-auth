@@ -1,11 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const [cardForm, setCardForm] = useState('');
   const [link, setLink] = useState('');
-  const currentUser = useContext(CurrentUserContext);
 
   function handleCardNameChange(e) {
     setCardForm(e.target.value);
@@ -16,9 +14,9 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   }
 
   useEffect(() => {
-    setCardForm(currentUser.cardForm);
-    setLink(currentUser.link);
-  }, [currentUser])
+    setCardForm('');
+    setLink('');
+  }, [isOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
